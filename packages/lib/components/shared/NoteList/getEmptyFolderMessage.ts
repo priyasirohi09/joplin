@@ -4,7 +4,7 @@ import Setting from '../../../models/Setting';
 import { FolderEntity } from '../../../services/database/types';
 import { getTrashFolderId, itemIsInTrash } from '../../../services/trash';
 
-const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string|null) => {
+const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string | null) => {
 	if (selectedFolderId === getTrashFolderId()) {
 		return _('There are no notes in the trash folder.');
 	} else if (selectedFolderId && itemIsInTrash(Folder.byId(folders, selectedFolderId))) {
@@ -12,7 +12,7 @@ const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string
 	}
 
 	if (Setting.value('appType') === 'desktop') {
-		return _('No notes in here. Create one by clicking on "New note".');
+		return _('No notes are present in the notebook. Create one by clicking on "New note".');
 	} else {
 		return _('There are currently no notes. Create one by clicking on the (+) button.');
 	}

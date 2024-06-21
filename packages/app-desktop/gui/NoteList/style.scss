@@ -6,14 +6,14 @@
 	overflow-x: hidden;
 	overflow-y: scroll;
 
-	> .notes {
+	>.notes {
 		display: flex;
 		overflow-x: hidden;
 	}
 
-	> .emptylist {
+	>.emptylist {
 		padding: 10px;
-		font-size: var(--joplin-font-size);
+		font-size: x-large;
 		color: var(--joplin-color);
 		background-color: var(--joplin-background-color);
 		font-family: var(--joplin-font-family);
@@ -21,7 +21,7 @@
 }
 
 .note-list-item {
- 	display: flex;
+	display: flex;
 }
 
 .note-list-item-wrapper {
@@ -29,7 +29,7 @@
 	position: relative;
 	box-sizing: border-box;
 
-	> .dragcursor {
+	>.dragcursor {
 		background-color: var(--joplin-color);
 		position: absolute;
 		z-index: 1000;
