@@ -126,6 +126,7 @@ function NoteListControls(props: Props) {
 			return 'icon-note';
 		} else {
 			return 'fas fa-plus';
+			// return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
@@ -134,6 +135,7 @@ function NoteListControls(props: Props) {
 			return 'far fa-check-square';
 		} else {
 			return 'fas fa-plus';
+			// return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
