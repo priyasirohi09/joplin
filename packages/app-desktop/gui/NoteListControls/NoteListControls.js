@@ -101,7 +101,7 @@ function NoteListControls(props) {
     }, [breakpoint, dynamicBreakpoints]);
     const todoIcon = (0, react_1.useMemo)(() => {
         if (breakpoint === dynamicBreakpoints.Sm) {
-            return 'fas fa-check-square';
+            return 'fa fa-check-square';
         }
         else {
             return 'fa fa-pencil-alt';
