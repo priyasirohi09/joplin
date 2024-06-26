@@ -45,7 +45,7 @@ const HeaderItem: React.FC<Props> = props => {
 	const addButton = <StyledAddButton
 		iconLabel={_('New')}
 		onClick={item.onPlusButtonClick}
-		iconName='fas fa-plus'
+		iconName='fas fa-bath'
 		level={ButtonLevel.SidebarSecondary}
 	/>;
 
