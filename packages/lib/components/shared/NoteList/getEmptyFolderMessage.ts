@@ -12,7 +12,7 @@ const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string
 	}
 
 	if (Setting.value('appType') === 'desktop') {
-		return _('No notes in here. Create one by clicking on "New note".');
+		return _('Your notebook is empty. Click "New Note" to start your first masterpiece!.');
 	} else {
 		return _('There are currently no notes. Create one by clicking on the (+) button.');
 	}
