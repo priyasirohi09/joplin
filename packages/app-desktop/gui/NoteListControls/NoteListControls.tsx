@@ -125,15 +125,15 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'icon-note';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
 	const todoIcon = useMemo(() => {
 		if (breakpoint === dynamicBreakpoints.Sm) {
-			return 'far fa-check-square';
+			return 'fas fa-check-square';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
