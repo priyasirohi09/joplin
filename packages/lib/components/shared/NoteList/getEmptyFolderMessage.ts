@@ -12,8 +12,8 @@ const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string
 	}
 
 	if (Setting.value('appType') === 'desktop') {
-		return _('No notes yet. Start creating by clicking on "New note".');
-
+		return _('No notes in this notebook. Click "New note" to start adding your notes.');
+		
 	} else {
 		return _('There are currently no notes. Create one by clicking on the (+) button.');
 	}
