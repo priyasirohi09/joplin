@@ -93,6 +93,7 @@
   },
   "dependencies": {
     "@types/fs-extra": "11.0.4",
+    "canvas": "2.11.2",
     "eslint-plugin-github": "4.10.1",
     "http-server": "14.1.1",
     "node-gyp": "9.4.1",
