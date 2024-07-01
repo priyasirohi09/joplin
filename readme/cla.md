@@ -19,7 +19,7 @@ for the license granted herein to the Company and recipients of software
 distributed by the Company, You reserve all right, title, and interest in and to
 Your Contributions.
 
-1. Definition.
+1. Definitions.
 
    * "You" (or "Your")
 
