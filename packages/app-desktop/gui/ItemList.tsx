@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DragEventHandler, KeyboardEventHandler, UIEventHandler } from 'react';
+import Setting from '@joplin/lib/models/Setting';
 interface Props<ItemType> {
 	style: React.CSSProperties & { height: number };
 	itemHeight: number;
@@ -152,6 +153,11 @@ class ItemList<ItemType> extends React.Component<Props<ItemType>, State> {
 		for (let i = this.state.topItemIndex; i <= this.state.bottomItemIndex; i++) {
 			const itemComp = this.props.itemRenderer(items[i], i);
 			itemComps.push(itemComp);
+		}
+		if (Setting.value('showMenuBar') === false) {
+			if (document.getElementById('text-alert-menu')) {
+				document.getElementById('text-alert-menu').style.display = 'block';
+			}
 		}
 
 		itemComps.push(blankItem('bottom', (items.length - this.state.bottomItemIndex - 1) * this.props.itemHeight));
