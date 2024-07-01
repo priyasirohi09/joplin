@@ -11,6 +11,16 @@ export const runtime = (): CommandRuntime => {
 	return {
 		execute: async () => {
 			Setting.toggle('showMenuBar');
+
+			if (!Setting.value('showMenuBar')) {
+				if (document.getElementById('text-alert-menu')) {
+					document.getElementById('text-alert-menu').style.display = 'block';
+				}
+			} else {
+				if (document.getElementById('text-alert-menu')) {
+					document.getElementById('text-alert-menu').style.display = 'none';
+				}
+			}
 		},
 	};
 };

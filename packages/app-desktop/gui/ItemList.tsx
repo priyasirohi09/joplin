@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DragEventHandler, KeyboardEventHandler, UIEventHandler } from 'react';
-
+import Setting from '@joplin/lib/models/Setting';
 interface Props<ItemType> {
 	style: React.CSSProperties & { height: number };
 	itemHeight: number;
@@ -142,9 +142,6 @@ class ItemList<ItemType> extends React.Component<Props<ItemType>, State> {
 			overflowX: 'hidden',
 			overflowY: 'auto',
 		};
-
-		// if (this.props.disabled) style.opacity = 0.5;
-
 		if (!this.props.itemHeight) throw new Error('itemHeight is required');
 
 		const blankItem = function(key: string, height: number) {
@@ -157,6 +154,11 @@ class ItemList<ItemType> extends React.Component<Props<ItemType>, State> {
 			const itemComp = this.props.itemRenderer(items[i], i);
 			itemComps.push(itemComp);
 		}
+		if (Setting.value('showMenuBar') === false) {
+			if (document.getElementById('text-alert-menu')) {
+				document.getElementById('text-alert-menu').style.display = 'block';
+			}
+		}
 
 		itemComps.push(blankItem('bottom', (items.length - this.state.bottomItemIndex - 1) * this.props.itemHeight));
 
@@ -166,6 +168,20 @@ class ItemList<ItemType> extends React.Component<Props<ItemType>, State> {
 		return (
 			<div ref={this.listRef} className={classes.join(' ')} style={style} onScroll={this.onScroll} onKeyDown={this.onKeyDown} onDrop={this.onDrop}>
 				{itemComps}
+				<p
+					id="text-alert-menu"
+					style={{
+						color: 'white',
+						display: 'none',
+						padding: '10px',
+						border: '1px solid red',
+						borderRadius: '5px',
+						textAlign: 'center',
+						fontWeight: 'bold',
+					}}
+				>
+				Press Ctrl + Shift + M to toggle the menu
+				</p>
 			</div>
 		);
 	}
