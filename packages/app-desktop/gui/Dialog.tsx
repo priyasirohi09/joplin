@@ -9,7 +9,7 @@ const DialogModalLayer = styled.div`
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,0.6);
-	align-items: flex-start;
+	align-items: center;
 	justify-content: center;
 
 	overflow: auto;
@@ -20,7 +20,7 @@ const DialogModalLayer = styled.div`
 `;
 
 const DialogRoot = styled.div`
-	background-color: ${props => props.theme.backgroundColor};
+	background-color:  #dae1ed;
 	padding: 16px;
 	box-shadow: 6px 6px 20px rgba(0,0,0,0.5);
 	margin: 20px;
