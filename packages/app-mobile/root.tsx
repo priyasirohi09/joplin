@@ -14,7 +14,7 @@ import ResourceService from '@joplin/lib/services/ResourceService';
 import KvStore from '@joplin/lib/services/KvStore';
 import NoteScreen from './components/screens/Note';
 import UpgradeSyncTargetScreen from './components/screens/UpgradeSyncTargetScreen';
-import Setting, { Env } from '@joplin/lib/models/Setting';
+import Setting, { AppType, Env } from '@joplin/lib/models/Setting';
 import PoorManIntervals from '@joplin/lib/PoorManIntervals';
 import reducer, { NotesParent, parseNotesParent, serializeNotesParent } from '@joplin/lib/reducer';
 import ShareExtension from './utils/ShareExtension';
@@ -39,7 +39,7 @@ const { connect, Provider } = require('react-redux');
 import { Provider as PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
 const { BackButtonService } = require('./services/back-button.js');
 import NavService from '@joplin/lib/services/NavService';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Dispatch } from 'redux';
 import reduxSharedMiddleware from '@joplin/lib/components/shared/reduxSharedMiddleware';
 const { shimInit } = require('./utils/shim-init-react.js');
 const { AppNav } = require('./components/app-nav.js');
@@ -85,6 +85,7 @@ const SyncTargetDropbox = require('@joplin/lib/SyncTargetDropbox.js');
 const SyncTargetAmazonS3 = require('@joplin/lib/SyncTargetAmazonS3.js');
 import BiometricPopup from './components/biometrics/BiometricPopup';
 import initLib from '@joplin/lib/initLib';
+import { isCallbackUrl, parseCallbackUrl, CallbackUrlCommand } from '@joplin/lib/callbackUrlUtils';
 import JoplinCloudLoginScreen from './components/screens/JoplinCloudLoginScreen';
 
 SyncTargetRegistry.addClass(SyncTargetNone);
@@ -121,14 +122,15 @@ import { ReactNode } from 'react';
 import { parseShareCache } from '@joplin/lib/services/share/reducer';
 import autodetectTheme, { onSystemColorSchemeChange } from './utils/autodetectTheme';
 import runOnDeviceFsDriverTests from './utils/fs-driver/runOnDeviceTests';
-import PluginRunnerWebView from './plugins/PluginRunner/PluginRunnerWebView';
+import PluginRunnerWebView from './components/plugins/PluginRunnerWebView';
 import { refreshFolders, scheduleRefreshFolders } from '@joplin/lib/folders-screen-utils';
 import KeymapService from '@joplin/lib/services/KeymapService';
 import PluginService from '@joplin/lib/services/plugins/PluginService';
 import initializeCommandService from './utils/initializeCommandService';
-import PlatformImplementation from './plugins/PlatformImplementation';
+import PlatformImplementation from './services/plugins/PlatformImplementation';
 import ShareManager from './components/screens/ShareManager';
 import appDefaultState, { DEFAULT_ROUTE } from './utils/appDefaultState';
+import { setDateFormat, setTimeFormat, setTimeLocale } from '@joplin/utils/time';
 
 type SideMenuPosition = 'left' | 'right';
 
@@ -185,10 +187,13 @@ const generalMiddleware = (store: any) => (next: any) => async (action: any) => 
 	if ((action.type === 'SETTING_UPDATE_ONE' && (action.key === 'dateFormat' || action.key === 'timeFormat')) || (action.type === 'SETTING_UPDATE_ALL')) {
 		time.setDateFormat(Setting.value('dateFormat'));
 		time.setTimeFormat(Setting.value('timeFormat'));
+		setDateFormat(Setting.value('dateFormat'));
+		setTimeFormat(Setting.value('timeFormat'));
 	}
 
 	if (action.type === 'SETTING_UPDATE_ONE' && action.key === 'locale' || action.type === 'SETTING_UPDATE_ALL') {
 		setLocale(Setting.value('locale'));
+		setTimeLocale(Setting.value('locale'));
 	}
 
 	if ((action.type === 'SETTING_UPDATE_ONE' && (action.key.indexOf('encryption.') === 0)) || (action.type === 'SETTING_UPDATE_ALL')) {
@@ -488,7 +493,7 @@ const getInitialActiveFolder = async () => {
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types -- Old code before rule was applied
-async function initialize(dispatch: Function) {
+async function initialize(dispatch: Dispatch) {
 	shimInit();
 
 	setDispatch(dispatch);
@@ -500,9 +505,9 @@ async function initialize(dispatch: Function) {
 		value: profileConfig,
 	});
 
-	Setting.setConstant('env', __DEV__ ? 'dev' : 'prod');
+	Setting.setConstant('env', __DEV__ ? Env.Dev : Env.Prod);
 	Setting.setConstant('appId', 'net.cozic.joplin-mobile');
-	Setting.setConstant('appType', 'mobile');
+	Setting.setConstant('appType', AppType.Mobile);
 	Setting.setConstant('tempDir', await initializeTempDir());
 	Setting.setConstant('cacheDir', `${getProfilesRootDir()}/cache`);
 	const resourceDir = getResourceDir(currentProfile, isSubProfile);
@@ -530,6 +535,7 @@ async function initialize(dispatch: Function) {
 
 	reg.setLogger(mainLogger);
 	reg.setShowErrorMessageBoxHandler((message: string) => { alert(message); });
+	reg.setDispatch(dispatch);
 
 	BaseService.logger_ = mainLogger;
 	// require('@joplin/lib/ntpDate').setLogger(reg.logger());
@@ -614,7 +620,7 @@ async function initialize(dispatch: Function) {
 			reg.logger().info(`First start: detected locale as ${detectedLocale}`);
 
 			Setting.skipDefaultMigrations();
-			Setting.setValue('firstStart', 0);
+			Setting.setValue('firstStart', false);
 		} else {
 			Setting.applyDefaultMigrations();
 		}
@@ -783,7 +789,7 @@ async function initialize(dispatch: Function) {
 	const pluginSettings = pluginService.unserializePluginSettings(Setting.value('plugins.states'));
 
 	const updatedSettings = pluginService.clearUpdateState(pluginSettings);
-	Setting.setValue('plugins.states', pluginService.serializePluginSettings(updatedSettings));
+	Setting.setValue('plugins.states', updatedSettings);
 
 	// ----------------------------------------------------------------------------
 	// Keep this below to test react-native-rsa-native
@@ -826,6 +832,7 @@ class AppComponent extends React.Component {
 	private themeChangeListener_: NativeEventSubscription|null = null;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
 	private dropdownAlert_ = (_data: any) => new Promise<any>(res => res);
+	private callbackUrl: string|null = null;
 
 	public constructor() {
 		super();
@@ -856,6 +863,12 @@ class AppComponent extends React.Component {
 			if (event.url === ShareExtension.shareURL && this.props.biometricsDone) {
 				logger.info('Sharing: handleOpenURL_: Processing share data');
 				void this.handleShareData();
+			} else if (isCallbackUrl(event.url)) {
+				logger.info('received callback url: ', event.url);
+				this.callbackUrl = event.url;
+				if (this.props.biometricsDone) {
+					void this.handleCallbackUrl();
+				}
 			}
 		};
 
@@ -974,7 +987,7 @@ class AppComponent extends React.Component {
 		);
 		onSystemColorSchemeChange(Appearance.getColorScheme());
 
-		setupQuickActions(this.props.dispatch, this.props.selectedFolderId);
+		this.quickActionShortcutListener_ = await setupQuickActions(this.props.dispatch);
 
 		await setupNotifications(this.props.dispatch);
 
@@ -1009,6 +1022,11 @@ class AppComponent extends React.Component {
 			this.unsubscribeNewShareListener_();
 			this.unsubscribeNewShareListener_ = undefined;
 		}
+
+		if (this.quickActionShortcutListener_) {
+			this.quickActionShortcutListener_.remove();
+			this.quickActionShortcutListener_ = undefined;
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
@@ -1016,6 +1034,7 @@ class AppComponent extends React.Component {
 		if (this.props.biometricsDone !== prevProps.biometricsDone && this.props.biometricsDone) {
 			logger.info('Sharing: componentDidUpdate: biometricsDone');
 			void this.handleShareData();
+			void this.handleCallbackUrl();
 		}
 	}
 
@@ -1057,6 +1076,51 @@ class AppComponent extends React.Component {
 			}
 		} else {
 			logger.info('Sharing: received empty share data.');
+		}
+	}
+
+	private async handleCallbackUrl() {
+		const url = this.callbackUrl;
+		this.callbackUrl = null;
+		if (url === null) {
+			return;
+		}
+
+		const { command, params } = parseCallbackUrl(url);
+
+		// adopted from app-mobile/utils/shareHandler.ts
+		// We go back one screen in case there's already a note open -
+		// if we don't do this, the dispatch below will do nothing
+		// (because routeName wouldn't change)
+		this.props.dispatch({ type: 'NAV_BACK' });
+		this.props.dispatch({ type: 'SIDE_MENU_CLOSE' });
+
+		switch (command) {
+
+		case CallbackUrlCommand.OpenNote:
+			this.props.dispatch({
+				type: 'NAV_GO',
+				routeName: 'Note',
+				noteId: params.id,
+			});
+			break;
+
+		case CallbackUrlCommand.OpenTag:
+			this.props.dispatch({
+				type: 'NAV_GO',
+				routeName: 'Notes',
+				tagId: params.id,
+			});
+			break;
+
+		case CallbackUrlCommand.OpenFolder:
+			this.props.dispatch({
+				type: 'NAV_GO',
+				routeName: 'Notes',
+				folderId: params.id,
+			});
+			break;
+
 		}
 	}
 
