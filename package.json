@@ -40,7 +40,7 @@
     "postinstall": "gulp build",
     "postPreReleasesToForum": "node ./packages/tools/postPreReleasesToForum",
     "publishAll": "git pull && yarn buildParallel && lerna version --yes --no-private --no-git-tag-version && gulp completePublishAll",
-    "releaseAndroid": "PATH=\"/usr/local/opt/openjdk@11/bin:$PATH\" node packages/tools/release-android.js",
+    "releaseAndroid": "PATH=\"/usr/local/opt/openjdk@17/bin:$PATH\" node packages/tools/release-android.js",
     "releaseAndroidClean": "node packages/tools/release-android.js",
     "releaseCli": "node packages/tools/release-cli.js",
     "releaseClipper": "node packages/tools/release-clipper.js",
@@ -59,6 +59,7 @@
     "updateMarkdownDoc": "node ./packages/tools/updateMarkdownDoc",
     "updateNews": "node ./packages/tools/website/updateNews",
     "updatePluginTypes": "./packages/generator-joplin/updateTypes.sh",
+    "validateFilenames": "node ./packages/tools/validateFilenames.js",
     "watch": "yarn workspaces foreach --parallel --verbose --interlaced --jobs 999 run watch",
     "watchWebsite": "nodemon --delay 1 --watch Assets/WebsiteAssets --watch packages/tools/website --watch packages/tools/website/utils --watch packages/doc-builder/build --ext md,ts,js,mustache,css,tsx,gif,png,svg --exec \"node packages/tools/website/build.js && http-server --port 8077 ../joplin-website/docs -a localhost\""
   },
