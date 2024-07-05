@@ -1,4 +1,4 @@
-import { AppState } from '../../app.reducer';
+			return 'fas fa-pencil-alt';import { AppState } from '../../app.reducer';
 import * as React from 'react';
 import { useEffect, useRef, useMemo } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
@@ -125,7 +125,8 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'icon-note';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt';
+			
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
