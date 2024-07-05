@@ -186,9 +186,11 @@ const NoteList = (props: Props) => {
 	}, [props.notesParentType, props.searches, props.selectedSearchId, props.highlightedWords]);
 
 	const renderEmptyList = () => {
+		const isSearchActive = props.notesParentType === 'Search' && !!props.selectedSearchId;
 		if (props.notes.length) return null;
-		return <div className="emptylist">{getEmptyFolderMessage(props.folders, props.selectedFolderId)}</div>;
+		return <div className="emptylist">{getEmptyFolderMessage(props.folders, props.selectedFolderId, isSearchActive)}</div>;
 	};
+
 
 	const renderFiller = (key: string, style: React.CSSProperties) => {
 		if (!props.notes.length) return null;
