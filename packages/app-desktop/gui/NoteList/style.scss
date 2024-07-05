@@ -13,7 +13,8 @@
 
 	> .emptylist {
 		padding: 10px;
-		font-size: var(--joplin-font-size);
+		// font-size: var(--joplin-font-size);
+		font-size:large;
 		color: var(--joplin-color);
 		background-color: var(--joplin-background-color);
 		font-family: var(--joplin-font-family);
@@ -45,3 +46,6 @@
 .note-list-item-wrapper.-provisional {
 	opacity: 0.5;
 }
+
+
+
