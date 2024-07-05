@@ -133,8 +133,8 @@ function NoteListControls(props: Props) {
 	const todoIcon = useMemo(() => {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'far fa-check-square';
-		} else {
-			return 'fas fa-plus';
+		} else {			
+			return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
