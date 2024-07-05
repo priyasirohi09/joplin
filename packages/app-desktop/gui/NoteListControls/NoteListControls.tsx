@@ -222,7 +222,7 @@ function NoteListControls(props: Props) {
 						props.setNewNoteButtonElement(el);
 					}}
 					className="new-note-button"
-					tooltip={ showTooltip ? CommandService.instance().label('newNote') : '' }
+					tooltip={showTooltip ? CommandService.instance().label('newNote') : ''}
 					iconName={noteIcon}
 					title={_('%s', noteButtonText)}
 					level={ButtonLevel.Primary}
@@ -232,7 +232,7 @@ function NoteListControls(props: Props) {
 				/>
 				<StyledButton ref={newTodoButtonRef}
 					className="new-todo-button"
-					tooltip={ showTooltip ? CommandService.instance().label('newTodo') : '' }
+					tooltip={showTooltip ? CommandService.instance().label('newTodo') : ''}
 					iconName={todoIcon}
 					title={_('%s', todoButtonText)}
 					level={ButtonLevel.Secondary}
@@ -248,7 +248,7 @@ function NoteListControls(props: Props) {
 		<StyledRoot ref={noteControlsRef} padding={props.padding} buttonVerticalGap={props.buttonVerticalGap}>
 			{renderNewNoteButtons()}
 			<BottomRow ref={searchAndSortRef} className="search-and-sort">
-				<SearchBar inputRef={searchBarRef}/>
+				<SearchBar inputRef={searchBarRef} />
 				{showsSortOrderButtons() &&
 					<SortOrderButtonsContainer>
 						<StyledPairButtonL
