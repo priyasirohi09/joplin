@@ -12,12 +12,17 @@
 	}
 
 	> .emptylist {
-		padding: 10px;
-		font-size: var(--joplin-font-size);
-		color: var(--joplin-color);
-		background-color: var(--joplin-background-color);
-		font-family: var(--joplin-font-family);
-	}
+			padding: 20px;
+			font-size: 1.3em; /* Increase font size */
+			color: #555; /* Make the color more noticeable */
+			background-color: #f9f9f9; /* Lighten the background color */
+			font-family: var(--joplin-font-family);
+			text-align: center; /* Center the text */
+			border: 1px dashed #ccc; /* Optional: Add a border for better visibility */
+			margin-top: 20px; /* Add some margin at the top */
+			border-radius: 8px; /* Optional: Add border radius for rounded corners */
+		}
+
 }
 
 .note-list-item {
