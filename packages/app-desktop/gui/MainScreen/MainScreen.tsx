@@ -147,6 +147,8 @@ class MainScreenComponent extends React.Component<Props, State> {
 	private styles_: any;
 	// eslint-disable-next-line @typescript-eslint/ban-types -- Old code before rule was applied
 	private promptOnClose_: Function;
+	private messageBoxRef = React.createRef<HTMLDivElement>();
+	private closeButtonRef = React.createRef<HTMLSpanElement>();
 
 	public constructor(props: Props) {
 		super(props);
@@ -514,7 +516,9 @@ class MainScreenComponent extends React.Component<Props, State> {
 			height: this.messageBoxHeight(),
 			display: 'flex',
 			alignItems: 'center',
+			position: 'relative',
 			paddingLeft: 10,
+			paddingRight: 10,
 			backgroundColor: theme.warningBackgroundColor,
 		};
 
@@ -545,6 +549,7 @@ class MainScreenComponent extends React.Component<Props, State> {
 
 	// eslint-disable-next-line @typescript-eslint/ban-types -- Old code before rule was applied
 	private renderNotificationMessage(message: string, callForAction: string = null, callForActionHandler: Function = null, callForAction2: string = null, callForActionHandler2: Function = null) {
+		if (!this.messageBoxVisible()) return null;
 		const theme = themeStyle(this.props.themeId);
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
 		const urlStyle: any = { color: theme.colorWarnUrl, textDecoration: 'underline' };
@@ -686,15 +691,51 @@ class MainScreenComponent extends React.Component<Props, State> {
 			msg = this.renderNotificationMessage(this.props.mustUpgradeAppMessage);
 		}
 
+		const handleClose = () => {
+			this.messageBoxRef.current.style.display = 'none';
+			this.updateMainLayout(this.buildLayout(this.props.plugins));
+		};
+
+		const handleCloseButtonMouseOver = () => {
+			if (this.closeButtonRef && this.closeButtonRef.current) {
+				this.closeButtonRef.current.style.background = theme.backgroundHover;
+			}
+		};
+
+		const handleCLoseButtonMouseout = () => {
+			if (this.closeButtonRef && this.closeButtonRef.current) {
+				this.closeButtonRef.current.style.background = 'none';
+			}
+		};
 		return (
-			<div style={styles.messageBox}>
-				<span style={theme.textStyle}>{msg}</span>
+			<div ref={this.messageBoxRef} style={styles.messageBox}>
+				<span style={{
+					...theme.textStyle, width: '95vw' }}>
+					{msg}
+				</span>
+				<span ref={this.closeButtonRef} onClick={handleClose} onMouseOver={handleCloseButtonMouseOver}
+					onMouseOut={handleCLoseButtonMouseout} style={
+						{
+							...theme.closeButtonStyle,
+							cursor: 'pointer',
+							padding: '2px',
+							width: '20px',
+							height: 'fit-content',
+							textAlign: 'center',
+						}
+					}>X</span>
 			</div>
 		);
 	}
 
 	public messageBoxVisible(props: Props = null) {
-		if (!props) props = this.props;
+		const messageBox = this.messageBoxRef && this.messageBoxRef.current;
+
+		if (!props) {
+			props = this.props;
+		}
+
+		if (messageBox && messageBox.style.display === 'none') return false;
 		return props.hasDisabledSyncItems ||
 			props.showMissingMasterKeyMessage ||
 			props.hasMissingSyncCredentials ||
@@ -707,7 +748,6 @@ class MainScreenComponent extends React.Component<Props, State> {
 			this.props.needApiAuth ||
 			!!this.props.mustUpgradeAppMessage;
 	}
-
 	public registerCommands() {
 		for (const command of commands) {
 			CommandService.instance().registerRuntime(command.declaration.name, command.runtime(this));
@@ -866,6 +906,7 @@ class MainScreenComponent extends React.Component<Props, State> {
 		const style = {
 			color: theme.color,
 			backgroundColor: theme.backgroundColor,
+			height: this.messageBoxVisible() ? this.rowHeight() : window.innerHeight,
 			...this.props.style,
 		};
 		const promptOptions = this.state.promptOptions;
@@ -889,10 +930,11 @@ class MainScreenComponent extends React.Component<Props, State> {
 		const noteContentPropertiesDialogOptions = this.state.noteContentPropertiesDialogOptions;
 		const shareNoteDialogOptions = this.state.shareNoteDialogOptions;
 		const shareFolderDialogOptions = this.state.shareFolderDialogOptions;
+		const height = this.messageBoxVisible() ? this.rowHeight() : window.innerHeight;
 
 		const layoutComp = this.props.mainLayout ? (
 			<ResizableLayout
-				height={styles.rowHeight}
+				height={height}
 				layout={this.props.mainLayout}
 				onResize={this.resizableLayout_resize}
 				onMoveButtonClick={this.resizableLayout_moveButtonClick}

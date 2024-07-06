@@ -254,6 +254,7 @@ export function extraStyles(theme: Theme) {
 			...globalStyle.headerStyle,
 			color: theme.color,
 			backgroundColor: theme.backgroundColor,
+			width: '100%',
 		},
 		h1Style,
 		h2Style,
@@ -322,6 +323,14 @@ export function extraStyles(theme: Theme) {
 		// but some times, depending on the theme, it might be too dark or too light, so it can be
 		// specified directly by the theme too.
 		highlightedColor: theme.highlightedColor ?? theme.selectedColor2,
+
+		closeButtonStyle: {
+			cursor: 'pointer',
+			padding: '2px',
+			width: '20px',
+			height: literal('fit-content'),
+			textAlign: literal('center'),
+		},
 	};
 }
 
