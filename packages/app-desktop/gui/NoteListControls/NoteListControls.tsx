@@ -235,7 +235,7 @@ function NoteListControls(props: Props) {
 					tooltip={ showTooltip ? CommandService.instance().label('newTodo') : '' }
 					iconName={todoIcon}
 					title={_('%s', todoButtonText)}
-					level={ButtonLevel.Secondary}
+					level={ButtonLevel.Primary}
 					size={props.buttonSize}
 					onClick={onNewTodoButtonClick}
 					disabled={!props.newTodoButtonEnabled}
