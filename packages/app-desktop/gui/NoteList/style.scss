@@ -13,10 +13,12 @@
 
 	> .emptylist {
 		padding: 10px;
-		font-size: var(--joplin-font-size);
-		color: var(--joplin-color);
+		// font-size: var(--joplin-font-size);
+		// color: var(--joplin-color);
 		background-color: var(--joplin-background-color);
 		font-family: var(--joplin-font-family);
+		color: red;
+		font-size: larger;
 	}
 }
 
