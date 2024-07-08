@@ -49,7 +49,7 @@ const TagItem = (props: Props) => {
 				onContextMenu={props.onContextMenu}
 				onClick={onClickHandler}
 			>
-				<StyledSpanFix className="tag-label">{Tag.displayTitle(tag)}</StyledSpanFix>
+				<StyledSpanFix className="tag-label"><i className="sc-hmdomO jeUOIH icon-tags"></i>{Tag.displayTitle(tag)}</StyledSpanFix>
 				{noteCount}
 			</StyledListItemAnchor>
 		</StyledListItem>
