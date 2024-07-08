@@ -125,7 +125,7 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'icon-note';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
@@ -133,17 +133,13 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'far fa-check-square';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt';
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
 	const showTooltip = useMemo(() => {
-		if (breakpoint === dynamicBreakpoints.Sm) {
-			return true;
-		} else {
-			return false;
-		}
-	}, [breakpoint, dynamicBreakpoints.Sm]);
+		return true;
+	}, []);
 
 	useEffect(() => {
 		if (lineCount === 1) {
@@ -222,7 +218,7 @@ function NoteListControls(props: Props) {
 						props.setNewNoteButtonElement(el);
 					}}
 					className="new-note-button"
-					tooltip={ showTooltip ? CommandService.instance().label('newNote') : '' }
+					tooltip={ showTooltip ? 'Ctrl + N' : '' }
 					iconName={noteIcon}
 					title={_('%s', noteButtonText)}
 					level={ButtonLevel.Primary}
@@ -232,7 +228,7 @@ function NoteListControls(props: Props) {
 				/>
 				<StyledButton ref={newTodoButtonRef}
 					className="new-todo-button"
-					tooltip={ showTooltip ? CommandService.instance().label('newTodo') : '' }
+					tooltip={ showTooltip ? 'Ctrl + T' : '' }
 					iconName={todoIcon}
 					title={_('%s', todoButtonText)}
 					level={ButtonLevel.Secondary}
