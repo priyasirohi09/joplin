@@ -125,7 +125,7 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'icon-note';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt'; // Changed from 'fas fa-plus' to 'fas fa-pencil-alt'
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
@@ -133,7 +133,7 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'far fa-check-square';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt'; // Changed from 'fas fa-plus' to 'fas fa-pencil-alt'
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
@@ -243,6 +243,9 @@ function NoteListControls(props: Props) {
 			</TopRow>
 		);
 	}
+
+
+
 
 	return (
 		<StyledRoot ref={noteControlsRef} padding={props.padding} buttonVerticalGap={props.buttonVerticalGap}>
