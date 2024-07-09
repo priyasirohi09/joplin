@@ -4,7 +4,7 @@ import CommandService from '@joplin/lib/services/CommandService';
 import { ChangeEvent, useCallback } from 'react';
 import NoteToolbar from '../../NoteToolbar/NoteToolbar';
 import { buildStyle } from '@joplin/lib/theme';
-import time from '@joplin/lib/time';
+// import time from '@joplin/lib/time';
 import styled from 'styled-components';
 
 const StyledRoot = styled.div`
@@ -94,7 +94,12 @@ export default function NoteTitleBar(props: Props) {
 	}, []);
 
 	function renderTitleBarDate() {
-		return <span className="updated-time-label" style={styles.titleDate}>{time.formatMsToLocal(props.noteUserUpdatedTime)}</span>;
+		const date = new Date(props.noteUserUpdatedTime);
+		const formattedDate = date.toLocaleString('default', {
+			year: 'numeric', month: 'long', day: 'numeric',
+			hour: '2-digit', minute: '2-digit', second: '2-digit',
+		});
+		return <span className="updated-time-label" style={styles.titleDate}>{formattedDate}</span>;
 	}
 
 	function renderNoteToolbar() {
