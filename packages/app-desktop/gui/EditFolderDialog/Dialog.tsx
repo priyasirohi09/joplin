@@ -17,7 +17,6 @@ import { focus } from '@joplin/lib/utils/focusHandler';
 
 interface Props {
 	themeId: number;
-	// eslint-disable-next-line @typescript-eslint/ban-types -- Old code before rule was applied
 	dispatch: Function;
 	folderId: string;
 	parentId: string;
@@ -25,8 +24,10 @@ interface Props {
 
 export default function(props: Props) {
 	const [folderTitle, setFolderTitle] = useState('');
+	const [folderSubtitle, setFolderSubtitle] = useState(''); // New state for subtitle
 	const [folderIcon, setFolderIcon] = useState<FolderIcon>();
 	const titleInputRef = useRef(null);
+	const subtitleInputRef = useRef(null); // New ref for subtitle
 
 	const isNew = !props.folderId;
 
@@ -36,6 +37,7 @@ export default function(props: Props) {
 		const folder = await Folder.load(props.folderId);
 		if (event.cancelled) return;
 		setFolderTitle(folder.title);
+		setFolderSubtitle(folder.subtitle); // Assuming subtitle is a field in the folder
 		setFolderIcon(Folder.unserializeIcon(folder.icon));
 	}, [props.folderId, isNew]);
 
@@ -54,6 +56,14 @@ export default function(props: Props) {
 		}, 100);
 	}, []);
 
+	useEffect(() => {
+		focus('Dialog::subtitleInputRef', subtitleInputRef.current);
+
+		setTimeout(() => {
+			titleInputRef.current.select();
+		}, 100);
+	}, []);
+
 	const onButtonRowClick = useCallback(async (event: ClickEvent) => {
 		if (event.buttonName === 'cancel') {
 			onClose();
@@ -63,6 +73,7 @@ export default function(props: Props) {
 		if (event.buttonName === 'ok') {
 			const folder: FolderEntity = {
 				title: folderTitle,
+				subtitle: folderSubtitle, // Include subtitle
 				icon: Folder.serializeIcon(folderIcon),
 			};
 
@@ -83,12 +94,14 @@ export default function(props: Props) {
 
 			return;
 		}
-		// eslint-disable-next-line @seiyab/react-hooks/exhaustive-deps -- Old code before rule was applied
-	}, [onClose, folderTitle, folderIcon, props.folderId, props.parentId]);
+	}, [onClose, folderTitle, folderSubtitle, folderIcon, props.folderId, props.parentId]);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
 	const onFolderTitleChange = useCallback((event: any) => {
 		setFolderTitle(event.target.value);
+	}, []);
+
+	const onFolderSubtitleChange = useCallback((event: any) => {
+		setFolderSubtitle(event.target.value);
 	}, []);
 
 	const onFolderIconChange = useCallback((event: ChangeEvent) => {
@@ -128,26 +141,31 @@ export default function(props: Props) {
 	}, []);
 
 	const formTitleInputId = useId();
+	const formSubtitleInputId = useId(); // New id for subtitle
+
 	function renderForm() {
 		return (
 			<div>
 				<div className="form">
 					<div className="form-input-group">
 						<label htmlFor={formTitleInputId}>{_('Title')}</label>
-						<StyledInput id={formTitleInputId} type="text" ref={titleInputRef} value={folderTitle} onChange={onFolderTitleChange}/>
+						<StyledInput id={formTitleInputId} type="text" ref={titleInputRef} value={folderTitle} onChange={onFolderTitleChange} />
 					</div>
-
+					<div className="form-input-group">
+						<label htmlFor={formSubtitleInputId}>{_('Subtitle')}</label>
+						<StyledInput id={formSubtitleInputId} type="text" ref={subtitleInputRef} value={folderSubtitle} onChange={onFolderSubtitleChange} />
+					</div>
 					<div className="form-input-group">
 						<label>{_('Icon')}</label>
 						<div className="icon-selector-row">
-							{ folderIcon && <div className="foldericon"><FolderIconBox folderIcon={folderIcon} /></div> }
+							{folderIcon && <div className="foldericon"><FolderIconBox folderIcon={folderIcon} /></div>}
 							<IconSelector
 								title={_('Select emoji...')}
 								icon={folderIcon}
 								onChange={onFolderIconChange}
 							/>
-							<Button ml={1} title={_('Select file...')} onClick={onBrowseClick}/>
-							{ folderIcon && <Button ml={1} title={_('Clear')} onClick={onClearClick}/> }
+							<Button ml={1} title={_('Select file...')} onClick={onBrowseClick} />
+							{folderIcon && <Button ml={1} title={_('Clear')} onClick={onClearClick} />}
 						</div>
 					</div>
 				</div>
@@ -168,7 +186,7 @@ export default function(props: Props) {
 	function renderDialogWrapper() {
 		return (
 			<div className="dialog-root">
-				<DialogTitle title={dialogTitle}/>
+				<DialogTitle title={dialogTitle} />
 				{renderContent()}
 				<DialogButtonRow
 					themeId={props.themeId}
@@ -179,6 +197,6 @@ export default function(props: Props) {
 	}
 
 	return (
-		<Dialog onClose={onClose} className="master-password-dialog" renderContent={renderDialogWrapper}/>
+		<Dialog onClose={onClose} className="master-password-dialog" renderContent={renderDialogWrapper} />
 	);
 }

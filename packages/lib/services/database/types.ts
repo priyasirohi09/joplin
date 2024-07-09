@@ -108,6 +108,7 @@ export interface FolderEntity {
   'parent_id'?: string;
   'share_id'?: string;
   'title'?: string;
+  'subtitle'?: string; // added subtitle entity
   'updated_time'?: number;
   'user_created_time'?: number;
   'user_data'?: string;
@@ -136,6 +137,7 @@ export interface ItemsFtEntity {
   'reserved5'?: any | null;
   'reserved6'?: any | null;
   'title'?: any | null;
+  'subtitle'?: any | null; // added subtitle entity
   'user_updated_time'?: any | null;
   'type_'?: number;
 }
@@ -175,6 +177,7 @@ export interface ItemsNormalizedEntity {
   'reserved5'?: number | null;
   'reserved6'?: number | null;
   'title'?: string;
+  'subtitle'?: string; // added subtitle entity
   'user_updated_time'?: number;
   'type_'?: number;
 }
@@ -239,6 +242,7 @@ export interface NoteEntity {
   'source_application'?: string;
   'source_url'?: string;
   'title'?: string;
+  'subtitle'?: string; // added subtitle entity
   'todo_completed'?: number;
   'todo_due'?: number;
   'updated_time'?: number;
@@ -257,6 +261,7 @@ export interface NotesNormalizedEntity {
   'parent_id'?: string;
   'source_url'?: string;
   'title'?: string;
+  'subtitle'?: string;
   'todo_completed'?: number;
   'todo_due'?: number;
   'user_created_time'?: number;
@@ -289,6 +294,7 @@ export interface ResourceEntity {
   'share_id'?: string;
   'size'?: number;
   'title'?: string;
+  'subtitle'?: string;
   'updated_time'?: number;
   'user_created_time'?: number;
   'user_data'?: string;
@@ -314,6 +320,7 @@ export interface RevisionEntity {
   'metadata_diff'?: string;
   'parent_id'?: string;
   'title_diff'?: string;
+  'subTitle_diff'?: string;
   'updated_time'?: number;
   'type_'?: number;
 }
@@ -351,6 +358,7 @@ export interface TagEntity {
   'is_shared'?: number;
   'parent_id'?: string;
   'title'?: string;
+  'subtitle'?: string;
   'updated_time'?: number;
   'user_created_time'?: number;
   'user_data'?: string;
@@ -362,6 +370,7 @@ export interface TagsWithNoteCountEntity {
   'id'?: string | null;
   'note_count'?: any | null;
   'title'?: string | null;
+  'subtitle'?: string | null;
   'todo_completed_count'?: any | null;
   'updated_time'?: number | null;
   'type_'?: number;
@@ -386,6 +395,7 @@ export const databaseSchema: DatabaseTables = {
 		parent_id: { type: 'string' },
 		share_id: { type: 'string' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		updated_time: { type: 'number' },
 		user_created_time: { type: 'number' },
 		user_data: { type: 'string' },
@@ -400,6 +410,7 @@ export const databaseSchema: DatabaseTables = {
 		is_shared: { type: 'number' },
 		parent_id: { type: 'string' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		updated_time: { type: 'number' },
 		user_created_time: { type: 'number' },
 		user_data: { type: 'string' },
@@ -508,6 +519,7 @@ export const databaseSchema: DatabaseTables = {
 		share_id: { type: 'string' },
 		size: { type: 'number' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		updated_time: { type: 'number' },
 		user_created_time: { type: 'number' },
 		user_data: { type: 'string' },
@@ -576,6 +588,7 @@ export const databaseSchema: DatabaseTables = {
 		source_application: { type: 'string' },
 		source_url: { type: 'string' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		todo_completed: { type: 'number' },
 		todo_due: { type: 'number' },
 		updated_time: { type: 'number' },
@@ -594,6 +607,7 @@ export const databaseSchema: DatabaseTables = {
 		parent_id: { type: 'string' },
 		source_url: { type: 'string' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		todo_completed: { type: 'number' },
 		todo_due: { type: 'number' },
 		user_created_time: { type: 'number' },
@@ -612,6 +626,7 @@ export const databaseSchema: DatabaseTables = {
 		reserved5: { type: 'number' },
 		reserved6: { type: 'number' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		user_updated_time: { type: 'number' },
 		type_: { type: 'number' },
 	},
@@ -627,6 +642,7 @@ export const databaseSchema: DatabaseTables = {
 		reserved5: { type: 'any' },
 		reserved6: { type: 'any' },
 		title: { type: 'any' },
+		subtitle: { type: 'any' },
 		user_updated_time: { type: 'any' },
 		type_: { type: 'number' },
 	},
@@ -659,6 +675,7 @@ export const databaseSchema: DatabaseTables = {
 		id: { type: 'string' },
 		note_count: { type: 'any' },
 		title: { type: 'string' },
+		subtitle: { type: 'string' },
 		todo_completed_count: { type: 'any' },
 		updated_time: { type: 'number' },
 		type_: { type: 'number' },
