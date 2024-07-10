@@ -75,7 +75,7 @@ const useSidebarListData = (props: Props): ListItem[] => {
 		const tagsHeader: HeaderListItem = {
 			kind: ListItemType.Header,
 			label: _('Tags'),
-			iconName: 'icon-tags',
+			iconName: props.tagHeaderIsExpanded ? 'fas fa-caret-down' : 'fas fa-caret-right',
 			id: HeaderId.TagHeader,
 			key: HeaderId.TagHeader,
 			onClick: onHeaderClick,
