@@ -108,7 +108,7 @@ const defaultKeymapItems = {
 		{ accelerator: 'Ctrl+Alt+1', command: 'switchProfile1' },
 		{ accelerator: 'Ctrl+Alt+2', command: 'switchProfile2' },
 		{ accelerator: 'Ctrl+Alt+3', command: 'switchProfile3' },
-		{ accelerator: 'Shift+Delete', command: 'permanentlyDeleteNote' },
+		// { accelerator: 'Shift+Delete', command: 'permanentlyDeleteNote' },
 	],
 };
 
