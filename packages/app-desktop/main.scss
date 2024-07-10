@@ -264,6 +264,7 @@ Component-specific classes
 }
 
 .master-password-dialog .dialog-content {
+	border-radius: 10px;
 	background-color: var(--joplin-background-color3);
 	padding: 1em;
 	padding-bottom: 1px;
@@ -291,4 +292,12 @@ Component-specific classes
 .master-password-dialog .fa-times {
 	color: var(--joplin-color-error);
 	margin-left: 5px;
+}
+div.master-password-dialog > * {
+	background-color : #dae1ed;
+}
+div.master-password-dialog {
+	display : flex;
+	align-items: center;
+	justify-content: center;
 }
