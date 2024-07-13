@@ -29,6 +29,7 @@ import Logger from '@joplin/utils/Logger';
 import onFolderDrop from '@joplin/lib/models/utils/onFolderDrop';
 import HeaderItem from '../listItemComponents/HeaderItem';
 import AllNotesItem from '../listItemComponents/AllNotesItem';
+import BaseItem from '@joplin/lib/models/BaseItem';
 
 const Menu = bridge().Menu;
 const MenuItem = bridge().MenuItem;
@@ -101,8 +102,16 @@ const useOnRenderItem = (props: Props) => {
 		const menu = new Menu();
 
 		if (itemId === getTrashFolderId()) {
+			const trashClearOption = new MenuItem(menuUtils.commandToStatefulMenuItem('emptyTrash'));
+			const trashResult = await BaseItem.allItemsInTrash();
+
+			if (trashResult.folderIds.length === 0 && trashResult.noteIds.length === 0) {
+				trashClearOption.enabled = false;
+				trashClearOption.label = 'No notes are here!';
+			}
+
 			menu.append(
-				new MenuItem(menuUtils.commandToStatefulMenuItem('emptyTrash')),
+				trashClearOption,
 			);
 			menu.popup({ window: bridge().window() });
 			return;
