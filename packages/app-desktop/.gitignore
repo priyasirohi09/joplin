@@ -24,3 +24,10 @@ build/defaultPlugins/
 build/7zip/7za
 build/7zip/7za.exe
 sentry.properties
+
+for creating a box and saying that it is empty when it is
+<div class="outer-box" style="width: 65px;height: 700px;">
+<div class="middle_box">There are no notes in the trash folder.</div>
+<div class="inner_box" style="flex-direction: column;"></div>
+</div>
+//complete the issue and complete the 50 percent today itself and next 2 days focus on revising mainly cs fundamentals and complete kitna they told
