@@ -76,7 +76,7 @@ export const StyledListItemAnchor = styled.a`
 	font-size: ${(props: StyleProps) => Math.round(props.theme.fontSize * 1.0833333)}px;
 	text-decoration: none;
 	color: ${(props: StyleProps) => listItemTextColor(props)};
-	cursor: default;
+	cursor: pointer;
 	opacity: ${(props: StyleProps) => props.selected || props.shareId ? 1 : 0.8};
 	white-space: nowrap;
 	display: flex;

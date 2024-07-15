@@ -134,7 +134,7 @@ export function extraStyles(theme: Theme) {
 		backgroundColor: theme.backgroundColor4,
 		borderColor: borderColor4,
 		userSelect: literal('none'),
-		// cursor: 'pointer',
+		cursor: 'pointer',
 
 	};
 
@@ -166,7 +166,7 @@ export function extraStyles(theme: Theme) {
 		fontFamily: globalStyle.fontFamily,
 		fontSize: baseFontSize,
 		boxSizing: literal('border-box'),
-		cursor: literal('default'),
+		cursor: literal('pointer'),
 		justifyContent: literal('center'),
 		color: theme.color,
 		whiteSpace: literal('nowrap'),
