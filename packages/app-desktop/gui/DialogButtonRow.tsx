@@ -67,7 +67,19 @@ export default function DialogButtonRow(props: Props) {
 
 	if (props.okButtonShow !== false) {
 		buttonComps.push(
-			<button disabled={props.okButtonDisabled} key="ok" style={buttonStyle} onClick={onOkButtonClick} ref={props.okButtonRef} onKeyDown={onKeyDown}>
+			<button
+				disabled={props.okButtonDisabled}
+				key="ok"
+				style={{
+					...buttonStyle,
+					backgroundColor: '#4CAF50',
+					color: 'white',
+					fontWeight: 'bold',
+				}}
+				onClick={onOkButtonClick}
+				ref={props.okButtonRef}
+				onKeyDown={onKeyDown}
+			>
 				{props.okButtonLabel ? props.okButtonLabel : _('OK')}
 			</button>,
 		);
@@ -75,7 +87,17 @@ export default function DialogButtonRow(props: Props) {
 
 	if (props.cancelButtonShow !== false) {
 		buttonComps.push(
-			<button disabled={props.cancelButtonDisabled} key="cancel" style={{ ...buttonStyle }} onClick={onCancelButtonClick}>
+			<button
+				disabled={props.cancelButtonDisabled}
+				key="cancel"
+				style={{
+					...buttonStyle,
+					backgroundColor: '#f44336',
+					color: 'white',
+					fontWeight: 'bold',
+				}}
+				onClick={onCancelButtonClick}
+			>
 				{props.cancelButtonLabel ? props.cancelButtonLabel : _('Cancel')}
 			</button>,
 		);
