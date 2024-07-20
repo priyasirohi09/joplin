@@ -2,6 +2,7 @@ import * as React from 'react';
 import ToolbarButton from './ToolbarButton/ToolbarButton';
 import ToggleEditorsButton, { Value } from './ToggleEditorsButton/ToggleEditorsButton';
 import ToolbarSpace from './ToolbarSpace';
+import { Dropdown } from './Dropdown/Dropdown';
 const { connect } = require('react-redux');
 const { themeStyle } = require('@joplin/lib/theme');
 
@@ -76,10 +77,22 @@ class ToolbarBaseComponent extends React.Component<Props, any> {
 			}
 		}
 
+		const fonts = {
+			'Arial': 'Arial',
+			'Georgia': 'Georgia',
+			'Verdana': 'Verdana',
+			'Times New Roman': 'Times New Roman',
+			'Courier New': 'Courier New',
+		};
+
 		return (
 			<div className="editor-toolbar" style={style}>
 				<div style={groupStyle}>
 					{leftItemComps}
+				</div>
+				<div style={groupStyle}>
+					<ToolbarSpace themeId={1} />
+					<Dropdown options={fonts} />
 				</div>
 				<div style={groupStyle}>
 					{centerItemComps}
