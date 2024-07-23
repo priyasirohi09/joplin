@@ -4,7 +4,7 @@ import Note from '@joplin/lib/models/Note';
 
 export const declaration: CommandDeclaration = {
 	name: 'deleteNote',
-	label: () => _('Delete note'),
+	label: () => _('Delete to-do'),
 	iconName: 'fa-times',
 };
 
