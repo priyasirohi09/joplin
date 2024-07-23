@@ -563,7 +563,7 @@ function NoteEditor(props: NoteEditorProps) {
 					<Button
 						iconName="icon-notebooks"
 						level={ButtonLevel.Primary}
-						title={_('In: %s', substrWithEllipsis(formNoteFolder.title, 0, 100))}
+						title={_('Save Notes: %s', substrWithEllipsis(formNoteFolder.title, 0, 100))}
 						onClick={() => {
 							props.dispatch({
 								type: 'FOLDER_AND_NOTE_SELECT',

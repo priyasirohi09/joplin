@@ -58,7 +58,7 @@ const AllNotesItem: React.FC<Props> = props => {
 				onClick={onAllNotesClick_}
 				onContextMenu={toggleAllNotesContextMenu}
 			>
-				{_('All notes')}
+				{_('All')}
 			</StyledListItemAnchor>
 		</StyledListItem>
 	);
