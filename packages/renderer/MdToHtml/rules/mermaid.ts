@@ -36,6 +36,7 @@ export default {
 					height: 0;
 					z-index: 1;
 					position: relative;
+					display: none;
 				} 
 				.joplin-editable:hover .mermaid-export-graph,
 				.joplin-editable .mermaid-export-graph:has(:focus-visible) {

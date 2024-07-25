@@ -39,13 +39,14 @@ import noteEditorCommands from './gui/NoteEditor/commands/index';
 import noteListCommands from './gui/NoteList/commands/index';
 import noteListControlsCommands from './gui/NoteListControls/commands/index';
 import sidebarCommands from './gui/Sidebar/commands/index';
+import { startScheduledTasks } from '@joplin/lib/services/scheduledTasks';
 import appCommands from './commands/index';
 import libCommands from '@joplin/lib/commands/index';
 import { homedir } from 'os';
 import getDefaultPluginsInfo from '@joplin/lib/services/plugins/defaultPlugins/desktopDefaultPluginsInfo';
 const electronContextMenu = require('./services/electron-context-menu');
 // import  populateDatabase from '@joplin/lib/services/debug/populateDatabase';
-
+startScheduledTasks();
 const commands = mainScreenCommands
 	.concat(noteEditorCommands)
 	.concat(noteListCommands)

@@ -1139,6 +1139,7 @@ packages/lib/services/rest/utils/paginatedResults.js
 packages/lib/services/rest/utils/readonlyProperties.js
 packages/lib/services/rest/utils/requestFields.js
 packages/lib/services/rest/utils/requestPaginationOptions.js
+packages/lib/services/scheduledTasks.js
 packages/lib/services/search/SearchEngine.resources.test.js
 packages/lib/services/search/SearchEngine.test.js
 packages/lib/services/search/SearchEngine.js
