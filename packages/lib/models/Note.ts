@@ -879,10 +879,12 @@ export default class Note extends BaseItem {
 				const updateSql = [
 					'deleted_time = ?',
 					'updated_time = ?',
+					'trashedAt = ?',
 				];
 
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
 				const params: any[] = [
+					now,
 					now,
 					now,
 				];
@@ -1162,5 +1164,28 @@ export default class Note extends BaseItem {
 		conflictNote.is_conflict = 1;
 		conflictNote.conflict_original_id = sourceNote.id;
 		return await Note.save(conflictNote, { autoTimestamp: false, changeSource: changeSource });
+	}
+	public static async deleteOldTrashedNotes(olderThanDays = 7): Promise<void> {
+		const cutoffTime = Date.now() - (olderThanDays * 24 * 60 * 60 * 1000);
+		const notesToDelete = await this.modelSelectAll(`
+        SELECT id FROM notes
+        WHERE deleted_time > 0 AND trashedAt < ?
+    `, [cutoffTime]);
+
+		for (const note of notesToDelete) {
+			await this.delete(note.id);
+		}
+	}
+
+	static async update(olderThanDays: { trashedAt: number; id: string }) {
+		const cutoffTime = Date.now() - (olderThanDays.trashedAt * 24 * 60 * 60 * 1000);
+		const notesToDelete = await this.modelSelectAll(`
+		SELECT id FROM notes
+		WHERE deleted_time > 0 AND trashedAt < ?
+	`, [cutoffTime]);
+
+		for (const note of notesToDelete) {
+			await this.delete(note.id);
+		}
 	}
 }

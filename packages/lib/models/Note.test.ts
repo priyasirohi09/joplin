@@ -605,4 +605,91 @@ describe('models/Note', () => {
 		expect(await Note.previews(getConflictFolderId())).toHaveLength(0);
 		expect(await Note.conflictedCount()).toBe(0);
 	});
+
+});
+// eslint-disable-next-line jest/require-top-level-describe
+describe('Trash auto-delete feature', () => {
+	beforeEach(async () => {
+		await setupDatabaseAndSynchronizer(1);
+		await switchClient(1);
+	});
+
+	it('should set trashedAt when moving notes to trash', async () => {
+		const folder = await Folder.save({});
+		const note = await Note.save({ title: 'test note', parent_id: folder.id });
+
+		await Note.batchDelete([note.id], { toTrash: true });
+
+		const trashedNote = await Note.load(note.id);
+		expect(trashedNote.trashedAt).toBeTruthy();
+		expect(trashedNote.trashedAt).toBe(trashedNote.deleted_time);
+	});
+
+	it('should not auto-delete notes in trash younger than 7 days', async () => {
+		const folder = await Folder.save({});
+		const note = await Note.save({ title: 'young note', parent_id: folder.id });
+
+		await Note.batchDelete([note.id], { toTrash: true });
+
+		await Note.deleteOldTrashedNotes();
+
+		const stillThere = await Note.load(note.id);
+		expect(stillThere).toBeTruthy();
+	});
+
+	it('should auto-delete notes in trash older than 7 days', async () => {
+		const folder = await Folder.save({});
+		const note = await Note.save({ title: 'old note', parent_id: folder.id });
+
+		await Note.batchDelete([note.id], { toTrash: true });
+
+		// Simulate 8 days passing
+		const eightDaysAgo = Date.now() - (8 * 24 * 60 * 60 * 1000);
+		await Note.update({ id: note.id, trashedAt: eightDaysAgo });
+
+		await Note.deleteOldTrashedNotes();
+
+		const shouldBeGone = await Note.load(note.id);
+		expect(shouldBeGone).toBeNull();
+	});
+
+	it('should only delete old notes from trash', async () => {
+		const folder = await Folder.save({});
+		const oldNote = await Note.save({ title: 'old note', parent_id: folder.id });
+		const youngNote = await Note.save({ title: 'young note', parent_id: folder.id });
+
+		await Note.batchDelete([oldNote.id, youngNote.id], { toTrash: true });
+
+		// Make oldNote 8 days old
+		const eightDaysAgo = Date.now() - (8 * 24 * 60 * 60 * 1000);
+		await Note.update({ id: oldNote.id, trashedAt: eightDaysAgo });
+
+		await Note.deleteOldTrashedNotes();
+
+		const oldNoteGone = await Note.load(oldNote.id);
+		const youngNoteStillThere = await Note.load(youngNote.id);
+
+		expect(oldNoteGone).toBeNull();
+		expect(youngNoteStillThere).toBeTruthy();
+	});
+
+	it('should not affect notes outside of trash', async () => {
+		const folder = await Folder.save({});
+		const normalNote = await Note.save({ title: 'normal note', parent_id: folder.id });
+		const trashedNote = await Note.save({ title: 'trashed note', parent_id: folder.id });
+
+		await Note.batchDelete([trashedNote.id], { toTrash: true });
+
+		// Make trashedNote 8 days old
+		const eightDaysAgo = Date.now() - (8 * 24 * 60 * 60 * 1000);
+		await Note.update({ id: trashedNote.id, trashedAt: eightDaysAgo });
+
+		await Note.deleteOldTrashedNotes();
+
+		const normalNoteStillThere = await Note.load(normalNote.id);
+		const trashedNoteGone = await Note.load(trashedNote.id);
+
+		expect(normalNoteStillThere).toBeTruthy();
+		expect(trashedNoteGone).toBeNull();
+	});
 });
