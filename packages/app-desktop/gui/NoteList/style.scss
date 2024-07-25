@@ -1,3 +1,5 @@
+@import "~framer-motion";
+
 .note-list {
   width: 100%;
   height: 100%;
@@ -10,7 +12,13 @@
     display: flex;
     overflow-x: hidden;
   }
-
+  & > * {
+    @extend .motion-safe;
+    @extend .motion-none;
+  }
+  .motion-safe {
+    transition: x 0.3s ease-in-out;
+  }
   > .emptylist {
     padding: 10px;
     font-size: 20px;
