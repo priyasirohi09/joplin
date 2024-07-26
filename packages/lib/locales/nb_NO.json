@@ -2258,10 +2258,10 @@
 	"Select all": [
 		"Marker alt"
 	],
-	"Select emoji...": [
+	"Select emoji": [
 		"Velg emoji…"
 	],
-	"Select file...": [
+	"Select file": [
 		"Velg fil…"
 	],
 	"Server is already running on port %d": [

@@ -4480,12 +4480,12 @@ msgstr "Vali kõik"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Vali kuupäev"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Vali kõik"
 
 #: packages/app-mobile/components/screens/folder.js:109

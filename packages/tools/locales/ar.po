@@ -4338,12 +4338,12 @@ msgstr "اختيار الكل"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "إختر التاريخ"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "اختيار الكل"
 
 #: packages/app-mobile/components/screens/folder.js:109

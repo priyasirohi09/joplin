@@ -4475,12 +4475,12 @@ msgstr "Одабери све"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Одаберите датум"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Одабери све"
 
 #: packages/app-mobile/components/screens/folder.js:109
