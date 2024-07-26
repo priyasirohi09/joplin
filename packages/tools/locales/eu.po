@@ -4422,12 +4422,12 @@ msgstr "Data aukeratu"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Data aukeratu"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Data aukeratu"
 
 #: packages/app-mobile/components/screens/folder.js:109

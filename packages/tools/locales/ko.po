@@ -4267,11 +4267,11 @@ msgid "Select all"
 msgstr "모두 선택"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "이모지 선택..."
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
-msgid "Select file..."
+msgid "Select file"
 msgstr "파일 선택..."
 
 #: packages/app-mobile/components/screens/folder.js:109

@@ -2408,10 +2408,10 @@
 	"Select all": [
 		"Vybrat vše"
 	],
-	"Select emoji...": [
+	"Select emoji": [
 		"Vybrat emoji..."
 	],
-	"Select file...": [
+	"Select file": [
 		"Vybrat soubor..."
 	],
 	"Server is already running on port %d": [

@@ -4486,12 +4486,12 @@ msgstr "Označi sve"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Odaberi datum"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Označi sve"
 
 #: packages/app-mobile/components/screens/folder.js:109

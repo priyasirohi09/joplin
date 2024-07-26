@@ -4192,11 +4192,11 @@ msgid "Select all"
 msgstr "全选"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "选择 emoji..."
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
-msgid "Select file..."
+msgid "Select file"
 msgstr "选择文件..."
 
 #: packages/app-mobile/components/screens/folder.js:109

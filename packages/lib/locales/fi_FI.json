@@ -2402,10 +2402,10 @@
 	"Select all": [
 		"Valitse kaikki"
 	],
-	"Select emoji...": [
+	"Select emoji": [
 		"Valitse emoji..."
 	],
-	"Select file...": [
+	"Select file": [
 		"Valitse tiedosto..."
 	],
 	"Server is already running on port %d": [

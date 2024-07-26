@@ -4311,11 +4311,11 @@ msgid "Select all"
 msgstr "Выбрать все"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Выбрать эмодзи..."
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
-msgid "Select file..."
+msgid "Select file"
 msgstr "Выбрать файл..."
 
 #: packages/app-mobile/components/screens/folder.js:109

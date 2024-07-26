@@ -142,11 +142,11 @@ export default function(props: Props) {
 						<div className="icon-selector-row">
 							{ folderIcon && <div className="foldericon"><FolderIconBox folderIcon={folderIcon} /></div> }
 							<IconSelector
-								title={_('Select emoji...')}
+								title={_('Select emoji')}
 								icon={folderIcon}
 								onChange={onFolderIconChange}
 							/>
-							<Button ml={1} title={_('Select file...')} onClick={onBrowseClick}/>
+							<Button ml={1} title={_('Select file')} onClick={onBrowseClick}/>
 							{ folderIcon && <Button ml={1} title={_('Clear')} onClick={onClearClick}/> }
 						</div>
 					</div>

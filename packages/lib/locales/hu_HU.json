@@ -2246,10 +2246,10 @@
 	"Select all": [
 		"Minden kiválasztása"
 	],
-	"Select emoji...": [
+	"Select emoji": [
 		"Emoji kiválasztása…"
 	],
-	"Select file...": [
+	"Select file": [
 		"Fájl kiválasztása…"
 	],
 	"Server is already running on port %d": [

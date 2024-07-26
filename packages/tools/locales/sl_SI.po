@@ -4401,12 +4401,12 @@ msgstr "Izberi vse"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Izberi datum"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Izberi vse"
 
 #: packages/app-mobile/components/screens/folder.js:109

@@ -2390,10 +2390,10 @@
 	"Select all": [
 		"Seleccionar todo"
 	],
-	"Select emoji...": [
+	"Select emoji": [
 		"Seleccionar emoji..."
 	],
-	"Select file...": [
+	"Select file": [
 		"Seleccionar archivo..."
 	],
 	"Server is already running on port %d": [

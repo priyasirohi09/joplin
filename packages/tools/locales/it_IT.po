@@ -4366,11 +4366,11 @@ msgid "Select all"
 msgstr "Seleziona tutto"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Seleziona emoji..."
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
-msgid "Select file..."
+msgid "Select file"
 msgstr "Seleziona file..."
 
 #: packages/app-mobile/components/screens/folder.js:109

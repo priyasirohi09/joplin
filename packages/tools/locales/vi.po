@@ -4389,12 +4389,12 @@ msgstr "Chọn tất cả"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:145
 #, fuzzy
-msgid "Select emoji..."
+msgid "Select emoji"
 msgstr "Chọn ngày"
 
 #: packages/app-desktop/gui/EditFolderDialog/Dialog.tsx:149
 #, fuzzy
-msgid "Select file..."
+msgid "Select file"
 msgstr "Chọn tất cả"
 
 #: packages/app-mobile/components/screens/folder.js:109
