@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { _ } from '@joplin/lib/locale';
 import CommandService from '@joplin/lib/services/CommandService';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import NoteToolbar from '../../NoteToolbar/NoteToolbar';
 import { buildStyle } from '@joplin/lib/theme';
 import time from '@joplin/lib/time';
 import styled from 'styled-components';
+import Button from '../../Button/Button';
+import Setting from '@joplin/lib/models/Setting';
 
 const StyledRoot = styled.div`
 	display: flex;
@@ -19,11 +21,22 @@ const StyledRoot = styled.div`
 	}
 `;
 
+
 const InfoGroup = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+button {
+    background-color: grey;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
 
+    &:hover {
+      background-color: grey;
+    }
+  }
 	@media (max-width: 800px) {
 		border-top: 1px solid ${props => props.theme.dividerColor};
 		width: 100%;
@@ -76,6 +89,14 @@ function styles_(props: Props) {
 }
 
 export default function NoteTitleBar(props: Props) {
+	const [currentTheme, setCurrentTheme] = useState(Setting.THEME_LIGHT);
+
+	const toggleTheme = useCallback(() => {
+		const newTheme = currentTheme === Setting.THEME_LIGHT ? Setting.THEME_DARK : Setting.THEME_LIGHT;
+		Setting.setValue('theme', newTheme);
+		setCurrentTheme(newTheme);
+	}, [currentTheme]);
+
 	const styles = styles_(props);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
@@ -119,6 +140,10 @@ export default function NoteTitleBar(props: Props) {
 				value={props.noteTitle}
 			/>
 			<InfoGroup>
+				{/* <>
+				<button onClick={() => {Setting.setValue('theme', Setting.THEME_DARK)}}>hello</button>
+				</> */}
+				<Button onClick={toggleTheme}>Toggle Theme</Button>
 				{renderTitleBarDate()}
 				{renderNoteToolbar()}
 			</InfoGroup>
