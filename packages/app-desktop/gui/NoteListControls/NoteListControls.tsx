@@ -125,7 +125,7 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'icon-note';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt'; // changed icon to pencil
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
@@ -133,7 +133,7 @@ function NoteListControls(props: Props) {
 		if (breakpoint === dynamicBreakpoints.Sm) {
 			return 'far fa-check-square';
 		} else {
-			return 'fas fa-plus';
+			return 'fas fa-pencil-alt'; // changed icon to pencil
 		}
 	}, [breakpoint, dynamicBreakpoints]);
 
