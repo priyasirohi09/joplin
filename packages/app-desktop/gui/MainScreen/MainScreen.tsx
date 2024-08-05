@@ -630,10 +630,16 @@ class MainScreenComponent extends React.Component<Props, State> {
 				onDisableSafeModeAndRestart,
 			);
 		} else if (this.props.hasMissingSyncCredentials) {
-			msg = this.renderNotificationMessage(
-				_('The synchronisation password is missing.'),
-				_('Set the password'),
-				onViewSyncSettingsScreen,
+			msg = (
+				<React.Fragment>
+					{this.renderNotificationMessage(
+						_('The synchronisation password is missing.'),
+						_('Set the password'),
+						onViewSyncSettingsScreen,
+						_('Dismiss'),
+					)}
+					<button>{_('Dismiss')}</button>
+				</React.Fragment>
 			);
 		} else if (this.props.shouldUpgradeSyncTarget) {
 			msg = this.renderNotificationMessage(
