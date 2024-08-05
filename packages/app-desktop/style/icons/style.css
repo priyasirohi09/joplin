@@ -76,6 +76,18 @@
 .icon-encryption:before {
   content: "\e910";
 }
+/* Custom size for FontAwesome icons */
+.icon-custom-size {
+  font-size: 0.97rem;
+}
+
+/* Apply FontAwesome content with specific size */
+.icon-custom-size:before {
+  content: "\f1f8";
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  font-size: 0.97rem;
+}
 .icon-plugins:before {
   content: "\e911";
 }
