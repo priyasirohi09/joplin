@@ -17,7 +17,7 @@ export const runtime = (): CommandRuntime => {
 			const msg = await Note.permanentlyDeleteMessage(noteIds);
 
 			const ok = bridge().showConfirmMessageBox(msg, {
-				buttons: [_('Delete'), _('Cancel')],
+				buttons: [_('Delete '), _('Cancel')],
 				defaultId: 1,
 			});
 
