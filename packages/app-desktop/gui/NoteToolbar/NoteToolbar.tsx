@@ -7,6 +7,20 @@ import stateToWhenClauseContext from '../../services/commands/stateToWhenClauseC
 const { connect } = require('react-redux');
 import { buildStyle } from '@joplin/lib/theme';
 
+
+const mapStateToPropsd = (state: any) => {
+	const whenClauseContext = stateToWhenClauseContext(state);
+
+	return {
+		toolbarButtonInfos: toolbarButtonUtils.commandsToToolbarButtons([
+			'showSpellCheckerMenu',
+			'editAlarm',
+			'toggleVisiblePanes',
+			'showNoteProperties',
+		].concat(pluginUtils.commandNamesFromViews(state.pluginService.plugins, 'noteToolbar')), whenClauseContext),
+	};
+};
+
 interface NoteToolbarProps {
 	themeId: number;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Old code before rule was applied
@@ -30,6 +44,18 @@ function styles_(props: NoteToolbarProps) {
 function NoteToolbar(props: NoteToolbarProps) {
 	const styles = styles_(props);
 	return <ToolbarBase style={styles.root} items={props.toolbarButtonInfos} disabled={props.disabled}/>;
+}
+
+function styles_name(props: NoteToolbarProps) {
+	return buildStyle('NoteToolbar', props.themeId, theme => {
+		return {
+			root: {
+				...props.style,
+				borderBottom: 'none',
+				backgroundColor: theme.backgroundColor,
+			},
+		};
+	});
 }
 
 const toolbarButtonUtils = new ToolbarButtonUtils(CommandService.instance());
