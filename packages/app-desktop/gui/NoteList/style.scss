@@ -13,8 +13,9 @@
 
 	> .emptylist {
 		padding: 10px;
-		font-size: var(--joplin-font-size);
-		color: var(--joplin-color);
+		font-size: x-large;
+		font-weight: bold;
+		color: rgb(41, 162, 254);
 		background-color: var(--joplin-background-color);
 		font-family: var(--joplin-font-family);
 	}
