@@ -6,7 +6,7 @@ import { getTrashFolderId, itemIsInTrash } from '../../../services/trash';
 
 const getEmptyFolderMessage = (folders: FolderEntity[], selectedFolderId: string|null) => {
 	if (selectedFolderId === getTrashFolderId()) {
-		return _('There are no notes in the trash folder.');
+		return _('There are no existing notebooks in the All Notes section.');
 	} else if (selectedFolderId && itemIsInTrash(Folder.byId(folders, selectedFolderId))) {
 		return _('This subfolder of the trash has no notes.');
 	}
