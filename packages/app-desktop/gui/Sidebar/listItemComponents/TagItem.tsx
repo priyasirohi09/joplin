@@ -22,15 +22,26 @@ interface Props {
 const TagItem = (props: Props) => {
 	const { tag, selected } = props;
 
+
+	const onClickHandler = useCallback(() => {
+		props.onClick({ tag });
+	}, [props.onClick, tag]);
+
+	if (!tag) {
+		return (
+			<StyledListItem>
+				<StyledListItemAnchor>
+					<StyledSpanFix>NO tags are available</StyledSpanFix>
+				</StyledListItemAnchor>
+			</StyledListItem>
+		);
+	}
+
 	let noteCount = null;
 	if (Setting.value('showNoteCounts')) {
 		const count = Setting.value('showCompletedTodos') ? tag.note_count : tag.note_count - tag.todo_completed_count;
 		noteCount = <NoteCount count={count}/>;
 	}
-
-	const onClickHandler = useCallback(() => {
-		props.onClick({ tag });
-	}, [props.onClick, tag]);
 
 	return (
 		<StyledListItem selected={selected}
