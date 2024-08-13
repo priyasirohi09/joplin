@@ -2506,45 +2506,29 @@ ul.tsd-type-parameters .tsd-comment {
   padding: 0;
 }
 
-.tsd-page-toolbar {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  color: #333;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  transition: transform 0.3s linear;
-}
-.tsd-page-toolbar a {
-  color: #333;
-  text-decoration: none;
-}
-.tsd-page-toolbar a.title {
-  font-weight: bold;
-}
-.tsd-page-toolbar a.title:hover {
-  text-decoration: underline;
-}
-.tsd-page-toolbar .table-wrap {
-  display: table;
-  width: 100%;
-  height: 40px;
-}
-.tsd-page-toolbar .table-cell {
-  display: table-cell;
-  position: relative;
-  white-space: nowrap;
-  line-height: 40px;
-}
-.tsd-page-toolbar .table-cell:first-child {
-  width: 100%;
+.tsd-page-toolbar .dark-mode-toggle {
+  background: #f0f0f0; /* Light mode background */
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 0 10px;
+  border-radius: 3px;
+  transition: background 0.3s ease;
 }
 
-.tsd-page-toolbar--hide {
-  transform: translateY(-100%);
+.tsd-page-toolbar .dark-mode-toggle:hover {
+  background: #ddd;
+}
+
+/* Dark mode styling */
+.dark-mode .tsd-page-toolbar {
+  background: #333;
+  color: #fff;
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode .tsd-page-toolbar a {
+  color: #fff;
 }
 
 .tsd-select .tsd-select-list li:before, .tsd-select .tsd-select-label:before, .tsd-widget:before {
