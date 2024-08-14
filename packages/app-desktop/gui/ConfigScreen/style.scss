@@ -1,3 +1,14 @@
+// BUILD ISSUE for rendering fonts correctly:
+
+
+// To render fonts correctly, use the command:
+// Close the desktop/terminal app
+// Reppen the root file of Joplin Repo
+// Build using: yarn install
+// Locate to the file: cd packages/app-desktop
+// Start using: yarn start
+// Restarting the app gets the job done correctly, as asked in the issue
+
 .config-screen-content-wrapper {
 	padding: 24px;
 	overflow: auto;
