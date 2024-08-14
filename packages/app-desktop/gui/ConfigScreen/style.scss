@@ -10,7 +10,7 @@
 }
 
 .config-screen-content > .section:last-child {
-	border-bottom: 0;
+	border-bottom: 2;
 }
 
 .font-search-list {
@@ -26,11 +26,11 @@
 }
 
 .font-search-list > div {
-	padding: 5px;
+	padding: 7px;
 }
 
 .font-search-item {
-	border-bottom: 1px solid var(--joplin-border-color4);
+	border-bottom: 2px solid var(--joplin-border-color4);
 	cursor: pointer;
 }
 
@@ -44,3 +44,14 @@
 	display: flex;
 	align-items: center;
 }
+
+// BUILD ISSUE for rendering fonts correctly:
+
+
+// To render fonts correctly, use the command:
+// Close the desktop/terminal app
+// Reppen the root file of Joplin Repo
+// Build using: yarn install
+// Locate to the file: cd packages/app-desktop
+// Start using: yarn start
+// Restarting the app gets the job done correctly, as asked in the issue

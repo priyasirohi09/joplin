@@ -4,6 +4,7 @@ import { _ } from '@joplin/lib/locale';
 import { SettingItemSubType } from '@joplin/lib/models/Setting';
 import { focus } from '@joplin/lib/utils/focusHandler';
 
+
 interface Props {
 	type: string;
 	style: CSSProperties;
@@ -12,6 +13,8 @@ interface Props {
 	onChange: (font: string)=> void;
 	subtype: string;
 }
+
+
 
 const FontSearch = (props: Props) => {
 	const { type, style, value, availableFonts, onChange, subtype } = props;
