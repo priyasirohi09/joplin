@@ -90,6 +90,22 @@ const NoteListItem = (props: NoteItemProps, ref: LegacyRef<HTMLDivElement>) => {
 		].filter(e => !!e).join(' ');
 	}, [props.index, props.isProvisional]);
 
+	const isCompleted = !!props.note.todo_completed;
+
+	// Define the style object conditionally applying the strike-through effect
+
+	const itemStyle: CSSProperties = {
+
+		...props.style,
+
+		height: props.itemSize.height,
+
+		textDecoration: isCompleted ? 'line-through' : 'none',
+
+		color: isCompleted ? 'gray' : 'inherit', // Optional: change color for completed tasks
+
+	};
+
 	const isActiveDragItem = props.dragIndex === props.index;
 	const isLastActiveDragItem = props.index === props.noteCount - 1 && props.dragIndex >= props.noteCount;
 
@@ -143,20 +159,22 @@ const NoteListItem = (props: NoteItemProps, ref: LegacyRef<HTMLDivElement>) => {
 		throw new Error('Unreachable');
 	}, [isActiveDragItem, isLastActiveDragItem, props.flow, props.itemSize]);
 
-	return <div
-		id={elementId}
-		ref={ref}
-		draggable={true}
-		tabIndex={0}
-		className={className}
-		data-id={noteId}
-		style={{ height: props.itemSize.height }}
-		onContextMenu={props.onContextMenu}
-		onDragStart={props.onDragStart}
-		onDragOver={props.onDragOver}
-	>
-		<div className="dragcursor" style={dragCursorStyle}></div>
-	</div>;
+	return (
+		<div
+			id={elementId}
+			ref={ref}
+			draggable={true}
+			tabIndex={0}
+			className={className}
+			data-id={noteId}
+			style={{ height: props.itemSize.height }}
+			onContextMenu={props.onContextMenu}
+			onDragStart={props.onDragStart}
+			onDragOver={props.onDragOver}
+		>	
+			<div className="dragcursor" style={dragCursorStyle}></div>
+		</div>
+	);
 };
 
 export default memo(forwardRef(NoteListItem));
